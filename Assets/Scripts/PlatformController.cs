@@ -8,6 +8,7 @@ public class PlatformController : MonoBehaviour
     public Rigidbody2D rb;
     public BoxCollider2D bc;
     public LevelController level;
+    public float despawnX = -10.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +19,10 @@ public class PlatformController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Delete if off screen
+        if (transform.position.x < despawnX - width) {
+            Destroy(gameObject);
+        }
         // Set speed
         rb.velocity = new Vector2(-level.levelSpeed, rb.velocity.y);
     }
